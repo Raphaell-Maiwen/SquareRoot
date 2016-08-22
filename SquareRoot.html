@@ -1,7 +1,24 @@
 <html>
 	<body>
 		<script>
-			var num = 95;
+			var num = Math.random()*1001;
+
+			//We mostly want integers (2 out of 3 times)
+			if(Math.floor(Math.random() * 3) < 2){
+				num = Math.round(num);
+			}
+
+			//The rest of the time, we want our floats to have a varied number of decimals between 1 and 5
+			else{
+				num = num.toFixed((Math.floor(Math.random() * 5)) +1);
+				var splittedNum = num.toString().split(".");
+				//Make sure we don't have a number with only zeros as decimals, which is ugly. 
+				if(splittedNum[1] == "0" || splittedNum[1] == "00" || splittedNum[1] == "000" || splittedNum[1] == "0000" ||
+					splittedNum[1] == "00000"){
+					num = Math.floor(num);
+				}
+			}
+
 			var sqrt = num/2;
 			var square = sqrt * sqrt;
 			var min = 0;
