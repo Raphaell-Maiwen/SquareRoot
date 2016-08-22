@@ -1,0 +1,47 @@
+<html>
+	<body>
+		<script>
+			var num = 95;
+			var sqrt = num/2;
+			var square = sqrt * sqrt;
+			var min = 0;
+			var max = num;
+
+			var limit = 1000;
+			var precision = 0;
+
+			while(square != num){
+				//To make sure the loop ends eventually.
+				//In the tests, thousands of iterations would compute the same sqrt and it never ended.
+				if(max == sqrt || min == sqrt){
+					precision++;
+					if(precision == limit){
+						break;
+					}
+				}
+
+				if(square > num){
+					max = sqrt;
+				}
+				else{
+					min = sqrt;
+				}
+				sqrt = (min + max)/2;
+				square = sqrt * sqrt;
+			}
+
+			//We will modify only float numbers...
+			if(sqrt % 1 != 0){
+				var splittedSqrt = sqrt.toString().split(".");
+				//...with more than 10 decimal places to show only the first 10. This way, we don't show 2.5 as 2.5000000000
+				// and we avoid the problem of imprecision (e.g. the root of 95 which was false from the 15th decimal.)
+				if(splittedSqrt[1].length >= 10){
+					sqrt = sqrt.toFixed(10);
+				}
+			}
+
+			document.write("The square root of " + num + " is " + sqrt);
+			console.log("The square root of " + num + " is " + sqrt);
+		</script>
+	</body>
+</html>
